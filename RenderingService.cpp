@@ -1,4 +1,4 @@
-//
+ //
 // Created by Yang Liu on 11/16/17.
 //
 
@@ -19,7 +19,7 @@ void NaviRice::Networking::RenderingService::onAcceptConnection(sockaddr_in clie
     std::cout << this->name << " onAcceptConnection" << std::endl;
 };
 
-void NaviRice::Networking::RenderingService::onReceiveData(Buffer) {
+void NaviRice::Networking::RenderingService::onReceiveData(Message) {
     std::cout << this->name << " onReceiveData" << std::endl;
 };
 

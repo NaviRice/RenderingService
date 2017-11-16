@@ -18,7 +18,7 @@ namespace NaviRice {
 
             void onAcceptConnection(sockaddr_in clientAddress);
 
-            void onReceiveData(Buffer);
+            void onReceiveData(Message);
         };
 
         struct Location {
