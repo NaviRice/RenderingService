@@ -1,0 +1,18 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
+SET(CMAKE_CXX_STANDARD 14)
+
+INCLUDE(FindProtobuf)
+
+SET(SOURCE_FILES RenderingService.cpp main.cpp)
+
+add_executable (renderingService main.cpp RenderingService.cpp)
+
+ADD_LIBRARY(rendering ${SOURCE_FILES})
+
+INCLUDE_DIRECTORIES(${PROTOBUF_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${common_BINARY_DIR})
+INCLUDE_DIRECTORIES(${common_SOURCE_DIR})
+
+TARGET_LINK_LIBRARIES(rendering ${LIBRARIES})
+
+TARGET_LINK_LIBRARIES(renderingService ${LIBRARIES} common)
