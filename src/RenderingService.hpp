@@ -6,45 +6,20 @@
 #define RENDERING_SERVICE_H
 
 #include <src/Service.hpp>
+#include "public_headers/Step.h"
 #include "string"
 
 namespace NaviRice {
     namespace Networking {
         namespace Services {
             class RenderingService : public Service {
+                std::function<void(Step)> onReceiveNewStepCallback;
             public:
                 RenderingService(std::string ipAddress,
                                  int port,
                                  std::string name);
                 void setupRoutes() override;
-            };
-
-            struct Location {
-
-            };
-
-            struct Transformation {
-                int x;
-                int y;
-                int z;
-
-                float scaleX;
-                float scaleY;
-                float scaleZ;
-
-                float rotationX;
-                float rotationY;
-                float rotationZ;
-            };
-
-            struct RoadSign {
-                int objectID;
-                Transformation transformation;
-            };
-
-            struct RoadInfo {
-                RoadSign roadSign;
-                char *description;
+                void onReceiveNewStep(std::function<void(Step)>);
             };
         }
     }
