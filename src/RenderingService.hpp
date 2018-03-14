@@ -15,6 +15,7 @@ namespace NaviRice {
             class RenderingService : public Service {
                 std::function<void(Step)> onReceiveNewStepCallback;
             public:
+                std::mutex receiveNewStepMutex;
                 RenderingService(std::string ipAddress,
                                  int port,
                                  std::string name);

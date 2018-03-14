@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include <build/src/proto/response.pb.h>
+#include <src/proto/response.pb.h>
 #include <nlohmann/json.hpp>
 #include "RenderingService.hpp"
 
@@ -14,9 +14,9 @@ NaviRice::Networking::Services::RenderingService::RenderingService(std::string i
 void NaviRice::Networking::Services::RenderingService::setupRoutes() {
     addRoute(navirice::proto::Request_Command_UPDATE, "/steps/current",
              [this](std::map<std::string, std::string> params,
-                std::map<std::string, std::string> options,
-                const char *body,
-                std::function<void(navirice::proto::Response)> respond) {
+                    std::map<std::string, std::string> options,
+                    const char *body,
+                    std::function<void(navirice::proto::Response)> respond) {
                  auto json = nlohmann::json::parse(body);
 
                  auto x = json["x"].get<double>();
@@ -30,7 +30,10 @@ void NaviRice::Networking::Services::RenderingService::setupRoutes() {
                  step.description = description.c_str();
                  step.icon = icon.c_str();
 
-                 this->onReceiveNewStepCallback(step);
+
+                 std::lock_guard<std::mutex> guard(receiveNewStepMutex);
+                 if(onReceiveNewStepCallback != nullptr)
+                    this->onReceiveNewStepCallback(step);
 
                  navirice::proto::Response response;
                  response.set_status(navirice::proto::Response_Status_SUCCESS);
@@ -41,5 +44,6 @@ void NaviRice::Networking::Services::RenderingService::setupRoutes() {
 
 void NaviRice::Networking::Services::RenderingService::onReceiveNewStep(
         std::function<void(Step)> onReceiveNewStepCallback) {
+    std::lock_guard<std::mutex> guard(this->receiveNewStepMutex);
     this->onReceiveNewStepCallback = onReceiveNewStepCallback;
 }
