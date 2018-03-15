@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <src/proto/response.pb.h>
+#include <src/proto/step.pb.h>
 #include <nlohmann/json.hpp>
 #include "RenderingService.hpp"
 
@@ -12,24 +13,19 @@ NaviRice::Networking::Services::RenderingService::RenderingService(std::string i
 };
 
 void NaviRice::Networking::Services::RenderingService::setupRoutes() {
-    addRoute(navirice::proto::Request_Command_UPDATE, "/steps/current",
-             [this](std::map<std::string, std::string> params,
-                    std::map<std::string, std::string> options,
-                    const char *body,
+    addRoute(navirice::proto::Request_Type_CURRENT_STEP,
+             [this](const char *body,
+                    unsigned long bodyLength,
                     std::function<void(navirice::proto::Response)> respond) {
-                 auto json = nlohmann::json::parse(body);
 
-                 auto x = json["x"].get<double>();
-                 auto y = json["y"].get<double>();
-                 std::string description = json["description"].get<std::string>();
-                 std::string icon = json["icon"].get<std::string>();
+                 navirice::proto::Step protoStep;
+                 protoStep.ParseFromArray(body, bodyLength);
 
-                 Step step = {};
-                 step.x = x;
-                 step.y = y;
-                 step.description = description.c_str();
-                 step.icon = icon.c_str();
-
+                 Step step;
+                 step.x = protoStep.x();
+                 step.y = protoStep.y();
+                 step.description = protoStep.description().c_str();
+                 step.icon = protoStep.icon().c_str();
 
                  std::lock_guard<std::mutex> guard(receiveNewStepMutex);
                  if(onReceiveNewStepCallback != nullptr)

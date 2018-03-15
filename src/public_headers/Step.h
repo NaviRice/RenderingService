@@ -6,8 +6,8 @@
 #define NAVIRICE_STEP_H
 
 typedef struct Step {
-    float x;
-    float y;
+    double x;
+    double y;
     const char *description;
     const char *icon;
 } Step;
