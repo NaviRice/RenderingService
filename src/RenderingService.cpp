@@ -5,7 +5,6 @@
 #include <iostream>
 #include <src/proto/response.pb.h>
 #include <src/proto/step.pb.h>
-#include <nlohmann/json.hpp>
 #include "RenderingService.hpp"
 
 NaviRice::Networking::Services::RenderingService::RenderingService(std::string ipAddress, int port, std::string name)
