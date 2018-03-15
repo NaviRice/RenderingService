@@ -7,6 +7,7 @@
 
 #include <src/Service.hpp>
 #include "public_headers/Step.h"
+#include <mutex>
 #include "string"
 
 namespace NaviRice {
