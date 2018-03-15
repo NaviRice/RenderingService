@@ -1,14 +1,9 @@
 <img src="logo_small.png" align="right" />
 
 # NaviRice Rendering Service
-Project 3D street sign onto the windshield
 
 ## Getting Started
-
-### Prerequisites
-### Installing
-
-## Deployment
+[Here](https://github.com/NaviRice/Services) is the detailed instructions on compiling and running the rendering service
 
 ## Contributing
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or Facebook group chat with the owners of this repository before making a change.
@@ -22,12 +17,6 @@ When contributing to this repository, please first discuss the change you wish t
 4. You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
 
 ## Authors
-
-- **Alex Gaines** - *Initial work* - [roboman2444](https://github.com/roboman2444)
-
-- **Binam Kayastha** - *Initial work* - [binamkayastha](https://github.com/binamkayastha)
-
-- **Can Alper** - *Initial work* - [calper-ql](https://github.com/calper-ql)
 
 - **Yang Liu** - *Initial work* - [byliuyang](https://github.com/byliuyang)
 
