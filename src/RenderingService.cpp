@@ -21,8 +21,8 @@ void NaviRice::Networking::Services::RenderingService::setupRoutes() {
                  protoStep.ParseFromArray(body, bodyLength);
 
                  Step step;
-                 step.x = protoStep.x();
-                 step.y = protoStep.y();
+                 step.latitude = protoStep.latitude();
+                 step.longitude = protoStep.longitude();
                  step.description = protoStep.description().c_str();
                  step.icon = protoStep.icon().c_str();
 
